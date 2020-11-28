@@ -1,65 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<link rel="stylesheet" href="style/styles.css">
-<script src="scripts/code.js"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-</head>
-<body>
-	<header class="header">
-		<h1 class="heading-truYum">truYum</h1>
-		<img src="Images/fork-knife.png" alt="forandKnife" class="forkImg">
-		<a href="/show-menu-list-admin" class="menu-button">Menu</a>
-	</header>
+
+<%@ include file="common/taglibs-and-head.jspf"%>
+<div class="container-my">
+	<%@ include file="common/header.jspf"%>
+
 	<div class="body">
 		<h2 class="body-text-heading">Edit Menu Item</h2>
-		<form class="form-edit-menu" name="menuItemForm" method="POST" action="edit-menu-item">
-			<label for="name">Name</label><br> <input type="text" name="title" id="title" minlength="2" value="${menuItem.name}"
-				maxlength="65" size="80" required><br>
-			<table>
-				<tr class="form-table-edit-menu-row">
-					<td class="form-table-edit-menu"><label for="field-price">Price
-							(Rs.)</label></td>
-					<td class="form-table-edit-menu"><label for="field-active">Active</label></td>
-					<td class="form-table-edit-menu"><label
-						for="field-datoflaunch">Date of Launch</label></td>
-					<td class="form-table-edit-menu"><label for="filed-category">Category</label></td>
-				</tr>
-				<tr class="form-table-edit-menu-row">
-					<td class="form-table-edit-menu"><input type="number"
-						value="${menuItem.price}" name="price" id="price" width="10"
-						required></td>
-					<td class="form-table-edit-menu">
-					<input type="radio" name="inStock" id="inStock" width="10" value="Yes" <c:if test="${menuItem.active}">checked</c:if> /> 
-						<label>Yes</label>
-						<input type="radio" name="inStock" id="inStock" width="10" <c:if test="${not menuItem.active}">checked</c:if>
-						value="No"> <label>No</label></td>
-					<td class="form-table-edit-menu"><input type="date"
-						value="${menuItem.dateOfLaunch}" name="dateOfLaunch"
-						id="dateOfLaunch" required width="10"></td>
-					<td class="form-table-edit-menu">
-					<select name="category" id="category">
+		<div class="edit-menu-item-form">
+			<form:form class="form-edit-menu" modelAttribute="menuItem" name="menuItemForm" method="POST" action="edit-menu-item" cssClass="edit-form">
+				<form:hidden path="id"/>
+				<form:label path="name">Name</form:label><br>
+				<form:input path="name" cssClass="edit-form-name" name="title" id="title"  value="${menuItem.name}" /><br>
+				<form:errors path="name" cssClass="text-warning"></form:errors>
+				<table>
+					<tr class="form-table-edit-menu-row">
+						
+						
+						
+						<td class="form-table-edit-menu">
+						<form:label path="price">Price (Rs.)</form:label></td>
+						<td class="form-table-edit-menu"><form:label path="active">Active</form:label></td>
+						<td class="form-table-edit-menu">
+						<form:label path="dateOfLaunch">Date of Launch</form:label></td>
+						<td class="form-table-edit-menu"><form:label path="freeDelivery">Category</form:label> </td>
+					</tr>
+					<tr class="form-table-edit-menu-row">
+						<td class="form-table-edit-menu">
+							<form:input path="price" type="number" value="${menuItem.price}" name="price" id="price"/><br>
+							<form:errors path="price" cssClass="text-warning"></form:errors>
+						</td>
+						<td class="form-table-edit-menu">
+							<form:radiobutton path="active" value="true" name="inStock" id="inStock"  />
+							<form:label path="active">Yes</form:label>
+							<form:radiobutton path="active" value="false" name="inStock" id="inStock"/>
+							<form:label path="active">No</form:label>
+						 </td>
+						<td class="form-table-edit-menu"> 
+							<form:input path="dateOfLaunch" name="dateOfLaunch" id="dateOfLaunch"/>
+						</td>
+						<td class="form-table-edit-menu">
+						<form:select path="category" >
 							<c:forEach var="x" items="${catogoryList}">
 								<option value="${x}">${x}</option>
 							</c:forEach>
-					</select>
-					</td>
-				</tr>
-			</table>
-			<input type="checkbox" value="${menuItem.freeDelivery}"
-				name="freeDelivery" id="freeDelivery" <c:if test="${menuItem.freeDelivery}">checked</c:if>> <label>Free
-				Delivery</label><br>
-			<input type="submit" value="Save">
-		</form>
+						</form:select>
+					</tr>
+				</table>
+				<form:label path="freeDelivery">Free Delivery</form:label>
+				<form:checkbox path="freeDelivery" name="freeDelivery" id="freeDelivery" value="${menuItem.freeDelivery}" />
+				<br> 
+					<input class="save-button-edit" type="submit"
+					value="Save">
+			</form:form>
+		</div>
 	</div>
-	<footer class="footer">
-		<label class="copyright">Copyright © 2020</label>
-	</footer>
-</body>
-</html>
+
+
+	<%@ include file="common/footer.jspf"%>
+</div>
+<%@ include file="common/end-tags.jspf"%>

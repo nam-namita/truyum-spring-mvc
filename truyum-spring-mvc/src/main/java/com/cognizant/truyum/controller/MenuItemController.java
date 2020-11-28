@@ -73,6 +73,7 @@ public class MenuItemController {
     public String showEditMenuStatus(@ModelAttribute("menuItem") @Valid MenuItem menuItem, BindingResult result) {
         
         if(result.hasErrors()) {
+        	System.out.println("Errors");
             return "edit-menu-item";
         }
         

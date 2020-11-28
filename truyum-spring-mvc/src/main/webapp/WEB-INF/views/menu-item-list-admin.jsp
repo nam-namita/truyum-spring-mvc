@@ -1,21 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="style/styles.css">
-    <script src="scripts/code.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body onload="menuListAdminLoaded()">
-    <header class="header">
-        <h1 class="heading-truYum">truYum</h1>
-        <img src="Images/fork-knife.png" alt="forandKnife" class="forkImg">
-        <a href="menu-item-list-admin.html" class="menu-button">Menu</a>
-    </header>
+<%@ include file="common/taglibs-and-head.jspf"%>
+<div class="container-my">
+	<%@ include file="common/header.jspf"%>
     <div class="body">
         <h1 class="body-text-heading" id="">Menu Items</h1>
         <div id="menu-Item-List-Result">
@@ -44,6 +29,6 @@
         	</table>
         </div>
     </div>
-    <footer class="footer"><label class="copyright">Copyright Â© 2020</label></footer>
-</body>
-</html>
+  <%@ include file="common/footer.jspf"%>
+</div>
+<%@ include file="common/end-tags.jspf"%>
